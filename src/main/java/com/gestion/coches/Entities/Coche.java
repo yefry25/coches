@@ -10,8 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "coche")
-public class Coche
-{
+public class Coche {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,7 +30,7 @@ public class Coche
     @Column(nullable = false)
     private Double precio;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "motor_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "motor_id")
     private Motor motor;
 }
