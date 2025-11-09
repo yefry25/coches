@@ -26,7 +26,7 @@ public class MotorController {
     @GetMapping({ "/nuevo", "/editar/{id}" })
     public String form(@PathVariable(required = false) Long id, Model m) {
         m.addAttribute("motor", id == null ? new Motor() : motorService.obtenerPorId(id));
-        return "formulario";
+        return "motorFormulario";
     }
 
     @PostMapping
@@ -34,6 +34,6 @@ public class MotorController {
         if (r.hasErrors())
             return "formulario";
         motorService.guardar(p);
-        return "redirect:/motor";
+        return "redirect:/coches";
     }
 }

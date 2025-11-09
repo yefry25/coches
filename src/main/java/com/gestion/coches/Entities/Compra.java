@@ -16,12 +16,12 @@ public class Compra
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cliente_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "coche_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "coche_id")
     private Coche coche;
 
     @Column(nullable = false)
