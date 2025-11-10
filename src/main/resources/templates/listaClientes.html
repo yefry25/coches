@@ -6,6 +6,116 @@
     <title>Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link th:href="@{/css/styles.css}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        main.flex-grow-1 {
+            padding-bottom: 3rem;
+        }
+
+        .clientes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .clientes-header h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: #0a1f44;
+        }
+
+        .btn-main {
+            background: linear-gradient(135deg, #143d6b, #0a1f44);
+            color: #ffffff !important;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 0.6rem 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-main:hover {
+            background: linear-gradient(135deg, #1c4c84, #0e2a56);
+            box-shadow: 0 4px 10px rgba(20, 61, 107, 0.25);
+        }
+
+        .card-custom-client {
+            border: none;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-custom-client:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-custom-client .card-body {
+            padding: 1.8rem;
+        }
+
+        .cliente-nombre {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #0a1f44;
+            margin-bottom: 1rem;
+        }
+
+        .cliente-info p {
+            margin: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .cliente-info span:first-child {
+            font-weight: 600;
+            color: #143d6b;
+        }
+
+        .cliente-actions {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e1e5ea;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #143d6b, #0a1f44);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            padding: 0.5rem 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #1c4c84, #0e2a56);
+            box-shadow: 0 4px 10px rgba(20, 61, 107, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .clientes-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .clientes-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -14,42 +124,29 @@
 
     <main class="flex-grow-1">
         <div class="container mt-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="fw-bold" style="color: #1E5631;">Nuestros Clientes</h1>
-                <a th:href="@{/clientes/nuevo}" class="btn btn-mango">
-                    Nuevo Cliente
+            <div class="clientes-header">
+                <h1>Nuestros Clientes</h1>
+                <a th:href="@{/clientes/nuevo}" class="btn-main">
+                    + Nuevo Cliente
                 </a>
             </div>
 
-            <div th:each="p : ${clientes}" class="card card-custom mb-4">
+            <div th:each="p : ${clientes}" class="card-custom-client">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5 class="fw-bold mb-3" style="color: #2E8B57;" th:text="${p.nombre}"></h5>
+                    <h5 class="cliente-nombre" th:text="${p.nombre}"></h5>
 
-                            <div class="row mb-3">
-                                <div class="col-sm-6">
-                                    <p class="mb-2">
-                                        <span class="fw-semibold" style="color: #6C757D;">Correo:</span>
-                                        <span th:text="${p.correo}" class="ms-2 text-dark"></span>
-                                    </p>
-                                    <p class="mb-2">
-                                        <span class="fw-semibold" style="color: #6C757D;">Teléfono:</span>
-                                        <span th:text="${p.telefono}" class="ms-2 text-dark"></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="cliente-info">
+                        <p><span>Correo:</span> <span th:text="${p.correo}"></span></p>
+                        <p><span>Teléfono:</span> <span th:text="${p.telefono}"></span></p>
                     </div>
 
-                    <div class="mt-4 pt-3 border-top">
-                        <a th:href="@{/clientes/editar/{id}(id=${p.id})}" class="btn btn-sm btn-warning-custom me-2">
+                    <div class="cliente-actions">
+                        <a th:href="@{/clientes/editar/{id}(id=${p.id})}" class="btn-edit">
                             Editar
                         </a>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
