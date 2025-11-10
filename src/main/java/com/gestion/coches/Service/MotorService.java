@@ -25,7 +25,11 @@ public class MotorService {
         return motorRepository.save(coche);
     }
 
-        public Motor obtenerPorId(Long id) {
+    public Motor obtenerPorId(Long id) {
         return motorRepository.findById(id).orElse(null);
+    }
+
+    public void eliminar(Long id) {
+        motorRepository.deleteById(id);
     }
 }

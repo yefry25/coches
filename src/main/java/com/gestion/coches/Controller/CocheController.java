@@ -25,10 +25,6 @@ public class CocheController
 
     @GetMapping
     public String listar(Model m) {
-        var motores = motorService.listarTodos();
-
-        System.out.println("Motores encontrados: " + motores.size());
-
         m.addAttribute("coches", cocheService.listarTodos());
         m.addAttribute("motores", motorService.listarTodos());
         return "lista";

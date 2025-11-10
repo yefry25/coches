@@ -18,9 +18,9 @@ public class MotorController {
     private final MotorService motorService;
 
     @GetMapping
-    public void listar(Model m) {
-        m.addAttribute("motor", motorService.listarTodos());
-        // return "lista";
+    public String listar(Model m) {
+        m.addAttribute("motores", motorService.listarTodos());
+        return "listaMotor";
     }
 
     @GetMapping({ "/nuevo", "/editar/{id}" })
@@ -34,6 +34,12 @@ public class MotorController {
         if (r.hasErrors())
             return "formulario";
         motorService.guardar(p);
-        return "redirect:/coches";
+        return "redirect:/motor";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Long id) {
+        motorService.eliminar(id);
+        return "redirect:/motor";
     }
 }

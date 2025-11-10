@@ -14,6 +14,7 @@ import lombok.*;
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
 public class ClienteController {
+
     private final ClienteService clienteService;
 
     @GetMapping
@@ -33,6 +34,12 @@ public class ClienteController {
         if (r.hasErrors())
             return "formulario";
         clienteService.guardar(p);
+        return "redirect:/clientes";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Long id) {
+        clienteService.eliminar(id);
         return "redirect:/clientes";
     }
 }

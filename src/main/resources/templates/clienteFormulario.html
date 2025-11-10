@@ -31,19 +31,19 @@
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold" style="color: #1E5631;">Correo</label>
-                            <input type="email" th:field="*{nombre}" class="form-control form-control-custom"
+                            <input type="email" th:field="*{correo}" class="form-control form-control-custom"
                                 placeholder="Ingrese el correo del cliente" required>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-semibold" style="color: #1E5631;">Teléfono</label>
-                            <input type="number" th:field="*{nombre}" class="form-control form-control-custom"
+                            <input type="number" th:field="*{telefono}" class="form-control form-control-custom"
                                 placeholder="Ingrese el teléfono del cliente" required>
                         </div>
                     </div>
 
                     <div class="d-flex gap-3 justify-content-end pt-3 border-top">
-                        <button type="submit" class="btn btn-mango">
+                        <button type="submit" class="btn btn-primary-custom">
                             Guardar cliente
                         </button>
                         <a th:href="@{/clientes}" class="btn btn-secondary-custom">

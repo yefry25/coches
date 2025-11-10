@@ -25,7 +25,7 @@ public class Compra
     private Coche coche;
 
     @Column(nullable = false)
-    private LocalDate fecha;
+    private LocalDate fecha = LocalDate.now();
 
     @Column(nullable = false)
     private Double precio_final;
