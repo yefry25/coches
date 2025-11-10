@@ -161,6 +161,8 @@
 
                         <div class="actions">
                             <a th:href="@{/coches/editar/{id}(id=${p.id})}" class="btn edit">Editar</a>
+                            <a th:href="@{/coches/eliminar/{id}(id=${p.id})}" class="btn delete"
+                                onclick="return confirm('¿Eliminar?')">Eliminar</a>
                         </div>
                     </div>
                 </div>

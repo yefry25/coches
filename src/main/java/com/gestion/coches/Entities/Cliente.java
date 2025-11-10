@@ -8,8 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cliente")
-public class Cliente
-{
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,4 +21,7 @@ public class Cliente
 
     @Column(nullable = true)
     private String telefono;
+
+    @Column(nullable = false)
+    private Boolean eliminado = false;
 }

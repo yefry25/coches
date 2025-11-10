@@ -28,6 +28,7 @@ public class CompraController {
     @GetMapping({ "/nuevo", "/editar/{id}" })
     public String form(@PathVariable(required = false) Long id, Model m) {
         m.addAttribute("compra", id == null ? new Compra() : compraService.obtenerPorId(id));
+
         m.addAttribute("clientes", clienteService.listarTodos());
         m.addAttribute("coches", cocheService.listarTodos());
         return "compraFormulario";
@@ -38,6 +39,6 @@ public class CompraController {
         if (r.hasErrors())
             return "compraFormulario";
         compraService.guardar(compra);
-        return "redirect:/coches";
+        return "redirect:/compras";
     }
 }

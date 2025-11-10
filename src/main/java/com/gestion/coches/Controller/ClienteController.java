@@ -19,7 +19,9 @@ public class ClienteController {
 
     @GetMapping
     public String listar(Model m) {
-        m.addAttribute("clientes", clienteService.listarTodos());
+        var clientes = clienteService.listarTodos();
+
+        m.addAttribute("clientes", clientes);
         return "listaClientes";
     }
 
@@ -39,7 +41,10 @@ public class ClienteController {
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
-        clienteService.eliminar(id);
+        var cliente = clienteService.obtenerPorId(id);
+        cliente.setEliminado(true);
+
+        clienteService.guardar(cliente);
         return "redirect:/clientes";
     }
 }

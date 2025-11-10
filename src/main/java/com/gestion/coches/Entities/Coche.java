@@ -33,4 +33,7 @@ public class Coche {
     @ManyToOne
     @JoinColumn(name = "motor_id")
     private Motor motor;
+
+    @Column(nullable = false)
+    private Boolean eliminado = false;
 }

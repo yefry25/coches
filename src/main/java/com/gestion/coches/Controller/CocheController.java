@@ -13,8 +13,7 @@ import lombok.*;
 @Controller
 @RequestMapping("/coches")
 @RequiredArgsConstructor
-public class CocheController
-{
+public class CocheController {
     private final CocheService cocheService;
     private final MotorService motorService;
 
@@ -25,29 +24,34 @@ public class CocheController
 
     @GetMapping
     public String listar(Model m) {
-        m.addAttribute("coches", cocheService.listarTodos());
+        var coches = cocheService.listarTodos();
+                                
+        m.addAttribute("coches", coches);
         m.addAttribute("motores", motorService.listarTodos());
         return "lista";
     }
 
-    @GetMapping({"/nuevo", "/editar/{id}"})
+    @GetMapping({ "/nuevo", "/editar/{id}" })
     public String form(@PathVariable(required = false) Long id, Model m) {
         m.addAttribute("coche", id == null ? new Coche() : cocheService.obtenerPorId(id));
-        System.out.println("Motores encontrados: " + motorService.listarTodos().size());
         m.addAttribute("motores", motorService.listarTodos());
         return "formulario";
     }
 
     @PostMapping
     public String guardar(@ModelAttribute Coche coche, BindingResult r) {
-        if (r.hasErrors()) return "formulario";
+        if (r.hasErrors())
+            return "formulario";
         cocheService.guardar(coche);
         return "redirect:/coches";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
-        cocheService.eliminar(id);
+        var coche = cocheService.obtenerPorId(id);
+        coche.setEliminado(true);
+
+        cocheService.guardar(coche);
         return "redirect:/coches";
     }
 }

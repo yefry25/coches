@@ -1,6 +1,7 @@
 package com.gestion.coches.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class ClienteService
     private ClienteRepository clienteRepository;
 
     public List<Cliente> listarTodos() {
-        return clienteRepository.findAll();
+        return clienteRepository.findAll()                       
+                                    .stream()
+                                    .filter(cliente -> cliente.getEliminado() == false)
+                                    .collect(Collectors.toList());
     }
 
     public Cliente guardar(Cliente cliente) {
